@@ -1,33 +1,8 @@
-<div class="jumbotron" id="getWasted">
-    <div class="row">
-      <div class="col-lg-10 col-lg-offset-1">
-        <form class="input-group" ng-submit="search()">
-          <input type="text" class="form-control" placeholder="Where you at?" ng-model="user.location">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="submit" id="searchB">SEARCH</button>
-          </span>
-        </form><!-- /input-group -->
-      </div><!-- /.col-lg-6 -->
-    </div><!-- /.row -->  
- 
+<div class="jumbotron" id="letsvote">
+<div id="chartContainer">
+    <canvas class="chart chart-line" chart-data="data"
+  chart-labels="labels" chart-legend="true" chart-series="series" chart-options="chartoptions">
+</canvas>
 </div>
-    
-<div class="row" id="barList">
-    <div class="col-sm-6 col-md-4 yelp_wrapper" ng-repeat="bar in bars track by $index">
-       <div class="yelp">
-           <div class="row">
-                <a href="{{bar.url}}" target="_blank">   
-                    <img class="col-sm-6 img-rounded " src="{{bar.image_url}}" alt="image"> 
-                    <h3 class="col-sm-6 barName">{{bar.name}}</h3>
-                </a> 
-           </div>
-            <div class="caption barDes">
-                <p>{{bar.snippet_text}} </p>
-                <p><div class="btn btn-default" role="button" ng-click="goin($index)">Button</div></p>   
-            </div>
-        </div>
-    </div>
-</div> 
+</div>
 
-
-<a class="btn btn-default" role="button" href="/auth/twitter">Button</a>

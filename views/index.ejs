@@ -6,8 +6,9 @@
     <script src="javascripts/vendor/jquery-2.1.4.js"></script>  
     <script src="javascripts/vendor/angular.min.js"></script>
     <script src="javascripts/vendor/angular-ui-router.min.js"></script>
-    <script src="javascripts/vendor/d3.min.js"></script> 
-      
+    <script src="javascripts/vendor/Chart.js"></script>
+    <script src="javascripts/vendor/angular-chart.js"></script> 
+        
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
@@ -17,24 +18,24 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 
-    <link href='https://fonts.googleapis.com/css?family=Abril+Fatface' rel='stylesheet' type='text/css'>
-   
     <link href="stylesheets/main.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="stylesheets/angular-chart.css">
   </head>
   
   <body ng-app="MyApp" >
     <div class="container">
-        <div class="jumbotron" id="intro_wrapper">
-            <div id="intro">
-                <h1>Plans tonight?</h1>
-                <p>See which bars are hoppin' tonight and RSVP ahead of time!
-Remember: take a cab and drink responsibly.</p>
-            </div>
-        </div>
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <p class="navbar-brand" id="appName">Chart the Stock Market</p>
+          </div>
+        </div><!--/.container-fluid -->
+      </nav>
 
-        <!-- Main component for a primary marketing message or call to action -->
-        <div ui-view></div>
+      <!-- Main component for a primary marketing message or call to action -->
+      <div ui-view></div>
     </div> <!-- /container -->
      
     
@@ -46,9 +47,9 @@ Remember: take a cab and drink responsibly.</p>
     
     <!-- Directives -->
     
+    
     <!-- Factories/Services -->
-    <script src="javascripts/factories/authFactory.js"></script>
-    <script src="javascripts/factories/barFactory.js"></script>
+    <script src="javascripts/factories/stockFactory.js"></script>
     
   </body>
 </html>  

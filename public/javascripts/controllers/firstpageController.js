@@ -1,26 +1,13 @@
-app.controller('firstpageController', ['$scope','$window','barF','authF', function($scope,$window, barF, authF) {
+app.controller('firstpageController', ['$scope','$window','stockF','getStocks', function($scope,$window,stockF,getStocks) { 
 
-    $scope.user={};
-    $scope.bars=barF.bars;
-    $scope.isGoin=[];
-    
-    $scope.search = function(){
-        console.log("!search!");
-        barF.getAllBars($scope.user.location);
-    };
+  $scope.labels =stockF.labels;// ["January", "February", "March", "April", "May", "June", "July"];
+  $scope.series = stockF.name;
+  $scope.data =stockF.data;
+  $scope.chartoptions={pointDot : false,
+                       pointHitDetectionRadius : 1,
+                       datasetFill : false,
+                       maintainAspectRatio: true,
+                      };
+  
 
-    $scope.goin=function(arrayIndex){
-        var whereInArray= $scope.isGoin.indexOf($scope.bars[arrayIndex]);
-        //goin
-        if(whereInArray===-1){
-            $scope.isGoin.push($scope.bars[arrayIndex]);
-            //add to DB
-        }
-        //not goin
-        else{
-            $scope.isGoin.splice(index, 1); 
-            //remove from DB
-        }
-    }
-    
 }]);

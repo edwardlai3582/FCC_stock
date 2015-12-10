@@ -1,5 +1,5 @@
 
-var app = angular.module('MyApp', ['ui.router']);
+var app = angular.module('MyApp', ['ui.router','chart.js']);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -8,13 +8,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       url: '/firstpage',
       templateUrl: 'htmls/firstpage.html',
       controller: 'firstpageController',
-      /*
-      onEnter: ['$state', 'authF', function($state, authF){
-        if(authF.isLoggedIn()){
-          $state.go('userpage');
-        }
-      }]
-      */
+      resolve: {
+        getStocks: ['stockF', function(stockF) {
+            return stockF.getStocks();
+        }]
+      }
     });
 
   $urlRouterProvider.otherwise('firstpage');

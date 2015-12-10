@@ -12,54 +12,40 @@ html,body {
     margin-right: 0;
 }
 
-#intro_wrapper{
-    margin: 0;
-}
-
-#intro{
-    font-family: 'Abril Fatface', cursive;
-    padding-left: 5%;
-    padding-right: 5%;
+.navbar{
     border-radius: 0;
-}
-
-#intro h1{
-    font-size: 40px;
-}
-
-#getWasted{
-    padding-left: 5%;
-    padding-right: 5%;
-    border-radius: 0;
+    border-width: 0;
     margin: 0;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-color:black;    
+    width:100%;
 }
 
-#searchB{
-    font-weight: bolder;
-    background:none;
+#appName{
+    color: darkturquoise;
+    text-shadow:none;
+    font-size: 30px;
 }
 
-#barList{
+@media screen and (max-width: 480px) {
+    #appName{
+        font-size: 20px;
+    }
+}
+
+#letsvote {
     position: relative;
-    width: 95%;
+    height: 100%;
+    width: 90%;
     left: 5%;
-    margin-top: 35px;
+    text-align: center;
+    font-size: 50px;
+    border-radius: 0px;
+    margin:0;
+    background-color:floralwhite;
 }
 
-.yelp_wrapper{
-    padding: 10px;
-}
-
-.yelp{
-    background-color: white;
-    padding: 10px;
-}
-
-.barName{
-    font-family: 'Abril Fatface', cursive;
-    color: darkslategray;
-}
-
-.barDes{
-    margin-top: 10px;
+#chartContainer{
+    width: 100%;
 }
