@@ -29,8 +29,9 @@
   margin-bottom: 4px;
   border-radius: 5px;
   padding: 2px 8px 2px 28px;
-  font-size: smaller;
+  font-size: 12px;
   cursor: default;
+    top:-50px;
 }
 .chart-legend li span,
 .bar-legend li span,

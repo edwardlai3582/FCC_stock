@@ -22,4 +22,10 @@ app.controller('firstpageController', ['$scope','$window','stockF','getStocks', 
         });
         $scope.stockName = '';
     };
+    
+    $scope.deleteStock= function(stockIndex){
+        console.log("delete "+$scope.series[stockIndex]);
+        stockF.deleteStock(stockIndex,$scope.series[stockIndex]);
+    }
+    
 }]);
