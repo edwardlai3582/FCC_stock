@@ -6,3 +6,20 @@
 </div>
 </div>
 
+
+<div id="pollform">   
+    <form class="form-horizontal" role="form" ng-submit="addStock()">
+        <div class="form-group">
+            <label class="control-label-left col-sm-offset-1 col-sm-4" for="poll_name">Add Stock:</label>
+            <div class="col-sm-offset-1 col-sm-9">
+                <input  class="form-control" placeholder="stock name" ng-model="stockName" required>
+            </div>
+        </div>
+
+        <div class="form-group">        
+            <div class="col-sm-offset-5 col-sm-7">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
+    </form>       
+</div> 

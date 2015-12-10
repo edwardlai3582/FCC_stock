@@ -26,6 +26,8 @@ html,body {
     color: darkturquoise;
     text-shadow:none;
     font-size: 30px;
+    position: relative;
+    top:5px;
 }
 
 @media screen and (max-width: 480px) {
