@@ -1,12 +1,26 @@
-app.factory('stockF', ['$http','$q',function($http, $q){
+app.factory('stockF', ['$http',function($http){
     var o = {};
-    /////
+
     o.stocks=[];
     o.xAxisArray=[];
-    ////
+    ////////////////////////////////////////
+    o.socket = io( 'localhost:3000' );
+    o.socket.on( 'connect', function() { 
+        console.log( 'connected' );
+    } );
+    o.socket.on('addStock', function(msg){
+        console.log( "add "+msg );
+        o.historyRequest(msg);
+    });
+    
+
     o.historyRequest= function(stockName){
         console.log(stockName+" start");
-        return $http.get('https://www.quandl.com/api/v3/datasets/WIKI/'+stockName+'/data.json?api_key=Rv-9x2BVx1XW48BRc3ZL&start_date=2015-05-28').success(function(data){
+        var d = new Date().setMonth(new Date().getMonth() - 6);
+        var dd = new Date(d);
+        var dString=[dd.getFullYear(), dd.getMonth()+1,dd.getDate() ].join('-') ;
+        
+        return $http.get('https://www.quandl.com/api/v3/datasets/WIKI/'+stockName+'/data.json?api_key=Rv-9x2BVx1XW48BRc3ZL&start_date='+dString).success(function(data){
                 var temp={};
                 var tempData=[];
                 temp['name']=stockName;
@@ -35,13 +49,17 @@ app.factory('stockF', ['$http','$q',function($http, $q){
     };
  
     o.addStock = function(stock) {
-        return $http.post('/stocks', stock).success(function(stock){
-            o.historyRequest(stock.stockName);      
+        return o.historyRequest(stock.stockName).success(function(response){
+            $http.post('/stocks', stock).success(function(response){
+                o.socket.emit('addStock', stock.stockName);    
+            });
         });
     }; 
    
     o.deleteStock = function(stockname){
-        return $http.delete('/stocks/'+ stockname);        
+        return $http.delete('/stocks/'+ stockname).success(function(response){
+            o.socket.emit('deleteStock', stockname);     
+        });        
     }
     
     ///////////

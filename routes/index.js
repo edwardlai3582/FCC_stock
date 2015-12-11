@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
 
+var mongoose = require('mongoose');
 var Stock = mongoose.model('Stock');
+
+
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

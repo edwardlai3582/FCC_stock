@@ -1,4 +1,7 @@
 app.controller('firstpageController', ['$scope','$window','stockF','getStocks',function($scope,$window,stockF,getStocks) { 
+    $scope.socket=stockF.socket;
+
+    
     $scope.stockName="";
     $scope.stocks=stockF.stocks;
     $scope.xAxisArray=stockF.xAxisArray;
@@ -55,10 +58,23 @@ app.controller('firstpageController', ['$scope','$window','stockF','getStocks',f
     
     $scope.deleteStock= function(index){
         console.log("delete "+$scope.stocks[index]['name']);
-        stockF.deleteStock($scope.stocks[index]['name']).success(function(stock){
+        stockF.deleteStock($scope.stocks[index]['name']).then(function(stock){
             var seriesArray = $scope.chartConfig.series;
             seriesArray.splice(index, 1);
         });
     }
+    
+    $scope.socket.on('deleteStock', function(msg){
+        console.log( "delete "+msg );
+        var i;
+        for(i=0;i<$scope.chartConfig.series.length;i++){
+            if($scope.chartConfig.series[i]['name']===msg){
+                console.log('found! '+$scope.chartConfig.series[i]['name']);
+                var seriesArray = $scope.chartConfig.series;
+                seriesArray.splice(i, 1);                
+                return;
+            }
+        }
+    });
     
 }]);
