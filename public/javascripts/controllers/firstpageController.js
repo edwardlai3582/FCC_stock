@@ -1,21 +1,51 @@
-app.controller('firstpageController', ['$scope','$window','stockF','getStocks', function($scope,$window,stockF,getStocks) { 
+app.controller('firstpageController', ['$scope','$window','stockF','getStocks',function($scope,$window,stockF,getStocks) { 
     $scope.stockName="";
-    $scope.labels =stockF.labels;// ["January", "February", "March", "April", "May", "June", "July"];
-    $scope.series = stockF.names;
-    $scope.data =stockF.data;
-    $scope.chartoptions={
-                         pointDot : false,
-                         pointHitDetectionRadius : 1,
-                         datasetFill : false,
-                         maintainAspectRatio: true,
-                        };
+    $scope.stocks=stockF.stocks;
+    $scope.xAxisArray=stockF.xAxisArray;
+
+    $scope.chartConfig = {
+        options: {
+            chart: {
+                type: 'line',
+                backgroundColor:null,
+                spacingBottom: 10,
+                spacingTop: 10,
+                spacingLeft: 10,
+                spacingRight: 10,
+            },
+            tooltip: {
+                style: {
+                    padding: 10,
+                    fontWeight: 'bold'
+                }
+            }
+        },
+        //Series object (optional) - a list of series using normal Highcharts series options.
+        series: $scope.stocks,
+        //Title configuration (optional)
+        title: {
+            text: ''
+        },
+        //Boolean to control showing loading status on chart (optional)
+        //Could be a string if you want to show specific loading text.
+        loading: false,
+        xAxis: {
+            categories: $scope.xAxisArray,
+            labels: {enabled:false},
+        },
+        yAxis: {
+            title: {text: ''},
+        },        
+    };  
   
     $scope.addStock = function(){
-        console.log("clickAdd");
         if(!$scope.stockName || $scope.stockName === '') { return; }
-        if($scope.series.indexOf($scope.stockName.toUpperCase())!==-1){
-            $scope.stockName = '';
-            return;
+        for(var i=0; i<$scope.stocks.length;i++){
+            if($scope.stocks[i]['name']===$scope.stockName.toUpperCase()){
+                console.log("duplicate");
+                $scope.stockName = '';
+                return;                
+            }
         }
         stockF.addStock({
             stockName: $scope.stockName.toUpperCase()
@@ -23,9 +53,12 @@ app.controller('firstpageController', ['$scope','$window','stockF','getStocks', 
         $scope.stockName = '';
     };
     
-    $scope.deleteStock= function(stockIndex){
-        console.log("delete "+$scope.series[stockIndex]);
-        stockF.deleteStock(stockIndex,$scope.series[stockIndex]);
+    $scope.deleteStock= function(index){
+        console.log("delete "+$scope.stocks[index]['name']);
+        stockF.deleteStock($scope.stocks[index]['name']).success(function(stock){
+            var seriesArray = $scope.chartConfig.series;
+            seriesArray.splice(index, 1);
+        });
     }
     
 }]);

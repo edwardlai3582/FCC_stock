@@ -1,5 +1,5 @@
 
-var app = angular.module('MyApp', ['ui.router','chart.js']);
+var app = angular.module('MyApp', ['ui.router','highcharts-ng']);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 

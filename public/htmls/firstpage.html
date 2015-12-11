@@ -1,13 +1,11 @@
 <div class="jumbotron" id="letsvote">
     <div id="chartContainer">
-        <canvas class="chart chart-line" chart-data="data"
-        chart-labels="labels" chart-legend="true" chart-series="series" chart-options="chartoptions">
-        </canvas>
+        <highchart id="chart1" config="chartConfig"></highchart>
     </div>
     <div id="stockform">  
         <form class="form-inline" role="form" ng-submit="addStock()">
           <div class="form-group">
-            <label >Add Stock Name:</label>
+            <label >Add Stock Symbol:</label>
             <input  class="form-control" placeholder="stock name" ng-model="stockName" required>
           </div>
           <button type="submit" class="btn btn-default">Submit</button>
@@ -15,9 +13,9 @@
     </div>
     
     <ul class="list-inline">
-        <li class="list-group-item" ng-repeat="stock in series track by $index">
+        <li class="list-group-item" ng-repeat="stock in stocks track by $index">
            <div class="col-md-2">
-            <p class="col-md-1">{{stock}}</p>
+            <p class="col-md-1">{{stock.name}}</p>
             <span class="glyphicon glyphicon-remove-circle col-md-1 clickDelete" ng-click="deleteStock($index)"></span>
            </div>
         </li>

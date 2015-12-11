@@ -34,7 +34,7 @@ router.post('/stocks', function(req, res, next) {
 
 /* DELETE stock. */
 router.delete('/stocks/:name', function(req, res, next) {
-
+    console.log(req.params.name);
     Stock.findOneAndRemove({'stockName': req.params.name}, function(err){
         if(err){ return next(err); }
         console.log("delete success");
