@@ -5,7 +5,7 @@
 
     <script src="javascripts/vendor/jquery-2.1.4.js"></script>  
     <script src="javascripts/vendor/angular.min.js"></script>
-    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="javascripts/vendor/highcharts-ng.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
 
@@ -41,24 +41,24 @@
         <div class="jumbotron" id="letsvote" ng-controller="firstpageController">
             <div id="stockform">  
                 <form class="form-inline" role="form" ng-submit="addStock()">
-                  <div class="form-group">
                     <label >Add Stock Symbol:</label>
-                    <input  class="form-control" placeholder="stock name" ng-model="stockName" required>
-                  </div>
-                  <button type="submit" class="btn btn-default">add</button>
+                    <div class="input-group">
+                        <input  class="form-control col-xs-2 col-md-4" placeholder="stock symbol" ng-model="stockName" required>
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default" id="addBtn">add</button>
+                        </span>
+                    </div>
                 </form>
             </div>
               <div id="chartContainer">
                 <highchart id="chart1" config="chartConfig"></highchart>
             </div>  
-            <ul class="list-inline">
-                <li class="list-group-item" ng-repeat="stock in stocks track by $index">
-                   <div class="col-md-2">
-                    <p class="col-md-1">{{stock.name}}</p>
-                    <span class="glyphicon glyphicon-remove-circle col-md-1 clickDelete" ng-click="deleteStock($index)"></span>
-                   </div>
-                </li>
-            </ul> 
+            <div class="btn-group btn-group-justified btnwrapper">
+                <div class="col-xs-6 col-md-2 list-group-item btn-default btn-sm clickDelete" ng-repeat="stock in stocks track by $index" ng-click="deleteStock($index)">
+                    <span>{{stock.name}}</span>
+                    <span class="glyphicon glyphicon-remove-circle trash"></span>
+                </div>
+            </div> 
         </div>
     </div> <!-- /container -->
 

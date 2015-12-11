@@ -23,7 +23,7 @@ html,body {
 }
 
 #appName{
-    color: darkturquoise;
+    color: whitesmoke;
     text-shadow:none;
     font-size: 30px;
     position: relative;
@@ -59,6 +59,27 @@ html,body {
     margin-bottom: 50px;
 }
 
+#addBtn{
+    background: darkseagreen;
+    color: white;
+    font-weight: bolder;
+    text-shadow: none; 
+}
+
+#addBtn:hover{
+    background:#436A14;
+}
+
 .clickDelete{
     cursor: pointer;
+    background: #9CA096;
+    text-shadow: none; 
+}
+
+.trash{
+    float: right;
+}
+
+.btnwrapper{
+    margin-bottom: 30px;    
 }
