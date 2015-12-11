@@ -12,7 +12,7 @@ app.factory('stockF', ['$http',function($http){
         console.log( "add "+msg );
         o.historyRequest(msg);
     });
-    
+ 
 
     o.historyRequest= function(stockName){
         console.log(stockName+" start");

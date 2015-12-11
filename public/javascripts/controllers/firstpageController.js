@@ -54,29 +54,31 @@ app.controller('firstpageController', ['$scope','stockF',function($scope,stockF)
         $scope.stockName = '';
     };
     
+    $scope.remove= function(index){
+        $scope.$evalAsync(function() {
+            var seriesArray = $scope.chartConfig.series;
+            seriesArray.splice(index, 1);
+        })
+    }
+    
     $scope.deleteStock= function(index){
         console.log("delete "+$scope.stocks[index]['name']);
         stockF.deleteStock($scope.stocks[index]['name']).then(function(stock){
-            var seriesArray = $scope.chartConfig.series;
-            seriesArray.splice(index, 1);
+            $scope.remove(index);
         });
     }
-    
+   
     $scope.socket.on('deleteStock', function(msg){
-        console.log( "delete " + msg );
-        var i;
-        for(i=0;i<$scope.chartConfig.series.length;i++){
+        console.log( "io delete " + msg );
+        for(var i=0;i<$scope.chartConfig.series.length;i++){
             if($scope.chartConfig.series[i]['name']===msg){
-                console.log('found! '+$scope.chartConfig.series[i]['name']);
-                $scope.chartConfig.series.splice(i, 1);
-                for(var j=0;j<$scope.chartConfig.series.length;j++){
-                console.log($scope.chartConfig.series[j]['name']);    
-                }
+                console.log('found '+$scope.chartConfig.series[i]['name']);
+                $scope.remove(i);
                 return;
             }
         }
     });
-    
+ 
     angular.element(document).ready(function () {
         stockF.getStocks();
     });
