@@ -5,10 +5,13 @@
 
     <script src="javascripts/vendor/jquery-2.1.4.js"></script>  
     <script src="javascripts/vendor/angular.min.js"></script>
-    <script src="javascripts/vendor/angular-ui-router.min.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="javascripts/vendor/highcharts-ng.js"></script>
-    <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>      
+    <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
+
+    <script src="javascripts/angularApp.js"></script>
+    <script src="javascripts/factories/stockFactory.js"></script>
+    <script src="javascripts/controllers/firstpageController.js"></script>         
         
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
@@ -35,21 +38,29 @@
       </nav>
 
       <!-- Main component for a primary marketing message or call to action -->
-      <div ui-view></div>
+        <div class="jumbotron" id="letsvote" ng-controller="firstpageController">
+            <div id="stockform">  
+                <form class="form-inline" role="form" ng-submit="addStock()">
+                  <div class="form-group">
+                    <label >Add Stock Symbol:</label>
+                    <input  class="form-control" placeholder="stock name" ng-model="stockName" required>
+                  </div>
+                  <button type="submit" class="btn btn-default">add</button>
+                </form>
+            </div>
+              <div id="chartContainer">
+                <highchart id="chart1" config="chartConfig"></highchart>
+            </div>  
+            <ul class="list-inline">
+                <li class="list-group-item" ng-repeat="stock in stocks track by $index">
+                   <div class="col-md-2">
+                    <p class="col-md-1">{{stock.name}}</p>
+                    <span class="glyphicon glyphicon-remove-circle col-md-1 clickDelete" ng-click="deleteStock($index)"></span>
+                   </div>
+                </li>
+            </ul> 
+        </div>
     </div> <!-- /container -->
-     
-    
-    <!-- Modules -->
-    <script src="javascripts/angularApp.js"></script>
 
-    <!-- Controllers-->
-    <script src="javascripts/controllers/firstpageController.js"></script>
-    
-    <!-- Directives -->
-    
-    
-    <!-- Factories/Services -->
-    <script src="javascripts/factories/stockFactory.js"></script>
-    
   </body>
 </html>  

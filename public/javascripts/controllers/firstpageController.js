@@ -1,4 +1,4 @@
-app.controller('firstpageController', ['$scope','$window','stockF','getStocks',function($scope,$window,stockF,getStocks) { 
+app.controller('firstpageController', ['$scope','stockF',function($scope,stockF) { 
     $scope.socket=stockF.socket;
 
     
@@ -23,9 +23,7 @@ app.controller('firstpageController', ['$scope','$window','stockF','getStocks',f
                 }
             }
         },
-        //Series object (optional) - a list of series using normal Highcharts series options.
         series: $scope.stocks,
-        //Title configuration (optional)
         title: {
             text: ''
         },
@@ -65,16 +63,22 @@ app.controller('firstpageController', ['$scope','$window','stockF','getStocks',f
     }
     
     $scope.socket.on('deleteStock', function(msg){
-        console.log( "delete "+msg );
+        console.log( "delete " + msg );
         var i;
         for(i=0;i<$scope.chartConfig.series.length;i++){
             if($scope.chartConfig.series[i]['name']===msg){
                 console.log('found! '+$scope.chartConfig.series[i]['name']);
-                var seriesArray = $scope.chartConfig.series;
-                seriesArray.splice(i, 1);                
+                $scope.chartConfig.series.splice(i, 1);
+                for(var j=0;j<$scope.chartConfig.series.length;j++){
+                console.log($scope.chartConfig.series[j]['name']);    
+                }
                 return;
             }
         }
     });
     
+    angular.element(document).ready(function () {
+        stockF.getStocks();
+    });
+     
 }]);
